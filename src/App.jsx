@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import axios from "axios";
 // IMPORT CSS Files
 import "./App.css";
 // IMPORT Contexts
@@ -11,10 +12,19 @@ import Postpage from "./pages/PostPage";
 
 function App() {
   // State VARs
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState([]);
+
+  function showsPosts() {
+    axios
+      .get("http://localhost:3000/posts")
+      .then((res) => setPost(res.data))
+      .catch((err) => console.log(err));
+  }
+
+  useEffect(() => showsPosts(), []);
 
   return (
-    <PostContext.Provider value={post}>
+    <PostContext.Provider value={{ post }}>
       <BrowserRouter>
         <Routes>
           <Route Component={Defaultlayout}>

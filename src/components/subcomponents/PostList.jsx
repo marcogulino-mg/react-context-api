@@ -8,9 +8,11 @@ export default function Postlist() {
   const { post } = useContext(PostContext);
 
   return (
-    <div>
+    <>
       <h3>Lista dei Posts</h3>
-      <Postcard />
-    </div>
+      {post.map((post) => (
+        <Postcard key={post.id} post={post} />
+      ))}
+    </>
   );
 }
