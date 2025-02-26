@@ -1,4 +1,6 @@
 export default function Postcard(props) {
+  const post = props.post;
+
   return (
     <>
       <h3>{post.title}</h3>
